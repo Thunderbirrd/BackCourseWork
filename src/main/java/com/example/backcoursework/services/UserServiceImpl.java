@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
             return response;
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        response.setUser(userRepo.save(user));
+        response.setUserId(userRepo.save(user).getId());
         response.setMessage("Successful");
         return response;
     }
@@ -41,8 +41,8 @@ public class UserServiceImpl implements UserService {
             response.setMessage("Wrong login");
             return response;
         }
-        if (passwordEncoder.matches(user.getPassword(), password)) {
-            response.setUser(user);
+        if (passwordEncoder.matches(password, user.getPassword())) {
+            response.setUserId(user.getId());
             response.setMessage("Login successful");
         } else {
             response.setMessage("Wrong password");
