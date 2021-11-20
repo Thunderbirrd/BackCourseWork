@@ -1,5 +1,6 @@
 package com.example.backcoursework.controllers.responses;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,7 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserResponse {
+@AllArgsConstructor
+public class BaseResponse {
     private String message;
-    private Integer userId;
+    private Integer id;
 }

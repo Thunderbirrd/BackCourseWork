@@ -1,6 +1,6 @@
 package com.example.backcoursework.services;
 
-import com.example.backcoursework.controllers.responses.UserResponse;
+import com.example.backcoursework.controllers.responses.BaseResponse;
 import com.example.backcoursework.models.User;
 import com.example.backcoursework.repos.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -16,14 +16,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserResponse saveUser(User user) {
-        UserResponse response = new UserResponse();
+    public BaseResponse saveUser(User user) {
+        BaseResponse response = new BaseResponse();
         if (findUserByLogin(user.getLogin()) != null) {
             response.setMessage("User with such login already exists");
             return response;
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        response.setUserId(userRepo.save(user).getId());
+        response.setId(userRepo.save(user).getId());
         response.setMessage("Successful");
         return response;
     }
@@ -34,15 +34,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse login(String login, String password) {
-        UserResponse response = new UserResponse();
+    public BaseResponse login(String login, String password) {
+        BaseResponse response = new BaseResponse();
         User user = findUserByLogin(login);
         if (user == null) {
             response.setMessage("Wrong login");
             return response;
         }
         if (passwordEncoder.matches(password, user.getPassword())) {
-            response.setUserId(user.getId());
+            response.setId(user.getId());
             response.setMessage("Login successful");
         } else {
             response.setMessage("Wrong password");

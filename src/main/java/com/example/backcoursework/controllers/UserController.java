@@ -1,6 +1,6 @@
 package com.example.backcoursework.controllers;
 
-import com.example.backcoursework.controllers.responses.UserResponse;
+import com.example.backcoursework.controllers.responses.BaseResponse;
 import com.example.backcoursework.models.User;
 import com.example.backcoursework.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class UserController {
     private final UserService userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public UserResponse register(@RequestBody String userData) throws JSONException {
+    public BaseResponse register(@RequestBody String userData) throws JSONException {
         User user = new User();
         JSONObject data = new JSONObject(userData);
         String login = data.getString("login");
@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public UserResponse login(@RequestBody String userData) throws JSONException {
+    public BaseResponse login(@RequestBody String userData) throws JSONException {
         JSONObject data = new JSONObject(userData);
         String login = data.getString("login");
         String password = data.getString("password");
