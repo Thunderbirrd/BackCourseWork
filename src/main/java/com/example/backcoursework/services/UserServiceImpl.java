@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         }
         if (passwordEncoder.matches(password, user.getPassword())) {
             response.setId(user.getId());
-            response.setMessage("Login successful");
+            response.setMessage("Login successful: " + user.getLogin());
         } else {
             response.setMessage("Wrong password");
         }
