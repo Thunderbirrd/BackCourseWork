@@ -6,6 +6,9 @@ import com.example.backcoursework.repos.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -23,6 +26,7 @@ public class UserServiceImpl implements UserService {
             return response;
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRating(0);
         response.setId(userRepo.save(user).getId());
         response.setMessage("Successful");
         return response;
@@ -48,5 +52,30 @@ public class UserServiceImpl implements UserService {
             response.setMessage("Wrong password");
         }
         return response;
+    }
+
+    @Override
+    public String checkUser(String login, Integer id) {
+        Optional<User> optional = userRepo.findById(id);
+        if (optional.isPresent()){
+            User user = optional.get();
+            if (user.getLogin().equals(login)){
+                return "User is valid";
+            }
+            return "User is not valid";
+        }
+        return "No user with such id";
+    }
+
+    @Override
+    @Transactional
+    public void decreaseRating(Integer id) {
+        userRepo.decreaseRating(id);
+    }
+
+    @Override
+    @Transactional
+    public void increaseRating(Integer id) {
+        userRepo.increaseRating(id);
     }
 }

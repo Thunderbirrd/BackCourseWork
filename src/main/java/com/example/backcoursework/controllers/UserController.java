@@ -35,4 +35,12 @@ public class UserController {
         String password = data.getString("password");
         return userService.login(login, password);
     }
+
+    @RequestMapping(value = "/checkUser", method = RequestMethod.POST)
+    public String checkUser(@RequestBody String userData){
+        JSONObject data = new JSONObject(userData);
+        String login = data.getString("login");
+        Integer id = data.getInt("id");
+        return userService.checkUser(login, id);
+    }
 }

@@ -22,7 +22,6 @@ public class SurveyServiceImpl implements SurveyService{
     private final AnswerRepo answerRepo;
 
     @Override
-    @Transactional
     public BaseResponse saveSurvey(Survey survey) {
         Survey saved = surveyRepo.save(survey);
         return new BaseResponse("Survey successfully saved", saved.getId());
@@ -49,15 +48,15 @@ public class SurveyServiceImpl implements SurveyService{
     }
 
     @Override
-    public String addVote(Integer id) {
+    @Transactional
+    public void addVote(Integer id) {
         optionRepo.addVote(id);
-        return "Success";
     }
 
     @Override
-    public String removeVote(Integer id) {
+    @Transactional
+    public void removeVote(Integer id) {
         optionRepo.removeVote(id);
-        return "Success";
     }
 
     @Override
@@ -66,12 +65,11 @@ public class SurveyServiceImpl implements SurveyService{
     }
 
     @Override
-    public List<Integer> getAllUserIdByOptionId(Integer optionId) {
-        return answerRepo.getAllUserIdByOptionId(optionId);
+    public Answer getAnswerByAllId(Integer surveyId, Integer optionId, Integer userId) {
+        return answerRepo.getAnswerByAllId(surveyId, userId, optionId);
     }
 
     @Override
-    @Transactional
     public BaseResponse deleteSurvey(Integer id) {
         answerRepo.deleteAllBySurveyId(id);
         optionRepo.deleteAllBySurveyId(id);
@@ -80,9 +78,18 @@ public class SurveyServiceImpl implements SurveyService{
     }
 
     @Override
-    @Transactional
+    public void deleteAnswer(Integer id) {
+        answerRepo.deleteById(id);
+    }
+
+    @Override
     public List<Survey> getAllSurveys() {
         return surveyRepo.getAll();
+    }
+
+    @Override
+    public List<Option> getAllOptionsBySurveyId(Integer surveyId) {
+        return optionRepo.getAllBySurveyId(surveyId);
     }
 
     @Override
@@ -97,10 +104,4 @@ public class SurveyServiceImpl implements SurveyService{
         return new BaseResponse("Option successfully saved", saved.getId());
     }
 
-    @Override
-    public BaseResponse deleteOption(Integer id) {
-        answerRepo.deleteAllByOptionId(id);
-        optionRepo.deleteById(id);
-        return new BaseResponse("Option successful deleted", id);
-    }
 }

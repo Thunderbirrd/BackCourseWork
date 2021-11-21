@@ -22,4 +22,6 @@ public class Survey {
     private String description;
     @Column(name = "type")
     private String type;
+    @Column
+    private Integer ownerId;
 }

@@ -11,4 +11,10 @@ public interface UserService {
     User findUserByLogin(String login);
 
     BaseResponse login(String login, String password);
+
+    String checkUser(String login, Integer id);
+
+    void decreaseRating(Integer id);
+
+    void increaseRating(Integer id);
 }

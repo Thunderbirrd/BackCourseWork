@@ -16,21 +16,23 @@ public interface SurveyService {
 
     BaseResponse deleteSurvey(Integer id);
 
+    void deleteAnswer(Integer id);
+
     List<Survey> getAllSurveys();
+
+    List<Option> getAllOptionsBySurveyId(Integer surveyId);
 
     BaseResponse saveAnswer(Answer answer);
 
     BaseResponse saveOption(Option option);
 
-    BaseResponse deleteOption(Integer id);
-
     String updateOptionDesc(String newDescription, Integer id);
 
-    String addVote(Integer id);
+    void addVote(Integer id);
 
-    String removeVote(Integer id);
+    void removeVote(Integer id);
 
     List<Integer> getAllUserIdBySurveyId(Integer surveyId);
 
-    List<Integer> getAllUserIdByOptionId(Integer optionId);
+    Answer getAnswerByAllId(Integer surveyId, Integer optionId, Integer userId);
 }
