@@ -6,10 +6,7 @@ import com.example.backcoursework.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,6 +14,7 @@ public class UserController {
 
     private final UserService userService;
 
+    @CrossOrigin(originPatterns = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public BaseResponse register(@RequestBody String userData) throws JSONException {
         User user = new User();
@@ -29,6 +27,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @CrossOrigin(originPatterns = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
     public BaseResponse login(@RequestBody String userData) throws JSONException {
         JSONObject data = new JSONObject(userData);
         String login = data.getString("login");
@@ -37,6 +36,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/checkUser", method = RequestMethod.POST)
+    @CrossOrigin(originPatterns = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
     public String checkUser(@RequestBody String userData){
         JSONObject data = new JSONObject(userData);
         String login = data.getString("login");
