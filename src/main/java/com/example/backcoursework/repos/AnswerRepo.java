@@ -21,4 +21,7 @@ public interface AnswerRepo extends CrudRepository<Answer, Integer> {
     @Query("SELECT a FROM Answer a WHERE a.surveyId=:surveyId AND a.userId =:userId AND a.optionId=:optionId")
     Answer getAnswerByAllId(@Param("surveyId") Integer surveyId, @Param("userId") Integer userId,
                                    @Param("optionId") Integer optionId);
+
+    @Query("SELECT a FROM Answer a WHERE a.userId=:userId")
+    List<Answer> getAllUsersAnswers(@Param("userId") Integer userId);
 }

@@ -17,4 +17,6 @@ public interface UserService {
     void decreaseRating(Integer id);
 
     void increaseRating(Integer id);
+
+    Integer getRating(Integer id);
 }

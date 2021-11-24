@@ -78,4 +78,10 @@ public class UserServiceImpl implements UserService {
     public void increaseRating(Integer id) {
         userRepo.increaseRating(id);
     }
+
+    @Override
+    public Integer getRating(Integer id) {
+        Optional<User> optional = userRepo.findById(id);
+        return optional.map(User::getRating).orElse(null);
+    }
 }

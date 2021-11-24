@@ -21,7 +21,7 @@ public class SurveyController {
     private final UserService userService;
 
     @RequestMapping(value = "/save", method = RequestMethod.PUT)
-    @CrossOrigin(origins = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
+    @CrossOrigin(originPatterns = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
     public BaseResponse saveSurvey(@RequestBody String surveyData){
         Survey survey = new Survey();
         JSONObject data = new JSONObject(surveyData);
@@ -32,7 +32,7 @@ public class SurveyController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    @CrossOrigin(origins = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
+    @CrossOrigin(originPatterns = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
     public String updateDescription(@RequestBody String surveyData){
         JSONObject data = new JSONObject(surveyData);
         String newDesc = data.getString("description");
@@ -41,7 +41,7 @@ public class SurveyController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    @CrossOrigin(origins = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
+    @CrossOrigin(originPatterns = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
     public BaseResponse deleteSurvey(@RequestBody String surveyData){
         JSONObject data = new JSONObject(surveyData);
         Integer id = data.getInt("id");
@@ -53,7 +53,7 @@ public class SurveyController {
     }
 
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
-    @CrossOrigin(origins = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
+    @CrossOrigin(originPatterns = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
     public List<Survey> getAll(){
         return service.getAllSurveys();
     }
@@ -67,7 +67,7 @@ public class SurveyController {
     }
 
     @RequestMapping(value = "/option/save", method = RequestMethod.POST)
-    @CrossOrigin(origins = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
+    @CrossOrigin(originPatterns = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
     public BaseResponse saveOption(@RequestBody String optionData){
         JSONObject data = new JSONObject(optionData);
         Option option = new Option();
@@ -78,7 +78,7 @@ public class SurveyController {
     }
 
     @RequestMapping(value = "/option/update", method = RequestMethod.POST)
-    @CrossOrigin(origins = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
+    @CrossOrigin(originPatterns = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
     public String updateOptionDesc(@RequestBody String optionData){
         JSONObject data = new JSONObject(optionData);
         String newDesc = data.getString("description");
@@ -87,7 +87,7 @@ public class SurveyController {
     }
 
     @RequestMapping(value = "/vote", method = RequestMethod.POST)
-    @CrossOrigin(origins = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
+    @CrossOrigin(originPatterns = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
     public BaseResponse vote(@RequestBody String voteData){
         JSONObject data = new JSONObject(voteData);
         Integer surveyId = data.getInt("survey_id");
@@ -104,7 +104,7 @@ public class SurveyController {
     }
 
     @RequestMapping(value = "/unvote", method = RequestMethod.POST)
-    @CrossOrigin(origins = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
+    @CrossOrigin(originPatterns = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
     public BaseResponse removeVote(@RequestBody String voteData){
         JSONObject data = new JSONObject(voteData);
         Integer surveyId = data.getInt("survey_id");
@@ -115,5 +115,12 @@ public class SurveyController {
         service.removeVote(optionId);
         userService.decreaseRating(userId);
         return new BaseResponse("Success", answer.getId());
+    }
+
+    @RequestMapping(value = "/getAllUsersAnswers", method = RequestMethod.POST)
+    @CrossOrigin(originPatterns = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
+    public List<Answer> getAllUsersAnswers(@RequestBody String userData){
+        JSONObject data = new JSONObject(userData);
+        return service.getAllUsersAnswers(data.getInt("id"));
     }
 }

@@ -70,6 +70,11 @@ public class SurveyServiceImpl implements SurveyService{
     }
 
     @Override
+    public List<Answer> getAllUsersAnswers(Integer userId) {
+        return answerRepo.getAllUsersAnswers(userId);
+    }
+
+    @Override
     public BaseResponse deleteSurvey(Integer id) {
         answerRepo.deleteAllBySurveyId(id);
         optionRepo.deleteAllBySurveyId(id);

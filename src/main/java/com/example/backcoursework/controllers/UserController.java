@@ -43,4 +43,12 @@ public class UserController {
         Integer id = data.getInt("id");
         return userService.checkUser(login, id);
     }
+
+    @RequestMapping(value = "/getRating", method = RequestMethod.POST)
+    @CrossOrigin(originPatterns = {"http://localhost:63342", "https://thunderbirrd.github.io/"})
+    public Integer getRating(@RequestBody String userData){
+        JSONObject data = new JSONObject(userData);
+        Integer id = data.getInt("id");
+        return userService.getRating(id);
+    }
 }

@@ -35,4 +35,6 @@ public interface SurveyService {
     List<Integer> getAllUserIdBySurveyId(Integer surveyId);
 
     Answer getAnswerByAllId(Integer surveyId, Integer optionId, Integer userId);
+
+    List<Answer> getAllUsersAnswers(Integer userId);
 }
