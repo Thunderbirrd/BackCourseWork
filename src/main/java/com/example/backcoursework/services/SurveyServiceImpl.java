@@ -75,6 +75,7 @@ public class SurveyServiceImpl implements SurveyService{
     }
 
     @Override
+    @Transactional
     public BaseResponse deleteSurvey(Integer id) {
         answerRepo.deleteAllBySurveyId(id);
         optionRepo.deleteAllBySurveyId(id);
