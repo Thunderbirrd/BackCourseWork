@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example</groupId>
-    <artifactId>BackCourseWork</artifactId>
+    <artifactId>backcoursework</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>BackCourseWork</name>
     <description>BackCourseWork</description>
@@ -11,6 +11,7 @@
         <java.version>11</java.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <mainClass>com.example.backcoursework.BackCourseWorkApplication</mainClass>
     </properties>
 
     <dependencies>
