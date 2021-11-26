@@ -101,6 +101,13 @@
                 <version>2.5.6</version>
                 <configuration>
                     <excludes>
+                        <archive>
+                            <manifest>
+                                <addClasspath>true</addClasspath>
+                                <classpathPrefix>lib/</classpathPrefix>
+                                <mainClass>com.example.backcoursework.BackCourseWorkApplication</mainClass>
+                            </manifest>
+                        </archive>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
@@ -108,7 +115,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 
